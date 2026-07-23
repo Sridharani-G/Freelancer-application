@@ -1,0 +1,22 @@
+{
+  "name": "intern",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node .\\scripts\\ensure-port-free.cjs && concurrently \"npm run dev --prefix backend\" \"node scripts/wait-for-backend.cjs && npm run dev --prefix client\"",
+    "backend": "node .\\scripts\\ensure-port-free.cjs && npm run dev --prefix backend",
+    "client": "node scripts/wait-for-backend.cjs && npm run dev --prefix client",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "mongodb": "^7.5.0"
+  }
+}

@@ -1,0 +1,12 @@
+MissingSchemaError: Schema hasn't been registered for model "User".
+Use mongoose.model(name, schema)
+    at NativeConnection.model (D:\intern\backend\node_modules\mongoose\lib\connection.js:1514:13)
+    at _getModelFromConn (D:\intern\backend\node_modules\mongoose\lib\helpers\populate\getModelsMapForPopulate.js:706:15)
+    at addModelNamesToMap (D:\intern\backend\node_modules\mongoose\lib\helpers\populate\getModelsMapForPopulate.js:636:17)
+    at getModelsMapForPopulate (D:\intern\backend\node_modules\mongoose\lib\helpers\populate\getModelsMapForPopulate.js:218:7)
+    at _populatePath (D:\intern\backend\node_modules\mongoose\lib\model.js:4496:21)
+    at model.populate (D:\intern\backend\node_modules\mongoose\lib\model.js:4463:21)
+    at D:\intern\backend\node_modules\mongoose\lib\query.js:2715:11
+    at _init (D:\intern\backend\node_modules\mongoose\lib\query.js:3394:5)
+    at Document.init (D:\intern\backend\node_modules\mongoose\lib\document.js:660:5)
+    at Document.$init (D:\intern\backend\node_modules\mongoose\lib\document.js:673:42)

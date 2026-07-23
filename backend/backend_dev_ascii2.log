@@ -1,0 +1,45 @@
+??? injected env (18) from .env // tip: ??? custom filepath { path: '/custom/path/.env' }
+Attempting to connect to MongoDB: mongodb://localhost:27017/skillsphere
+
+???? SkillSphere API running on http://localhost:5000
+???? Socket.io ready
+???? Environment: development
+
+node : ??? MongoDB 
+connection failed: connect 
+ECONNREFUSED ::1:27017, 
+connect ECONNREFUSED 
+127.0.0.1:27017
+At line:1 char:1
++ node 
+d:\intern\backend\server.js 
+> backend_dev.log 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo           
+   : NotSpecified: (??? Mon  
+  goDB con...127.0.0.1:270   
+ 17:String) [], RemoteExc    
+eption
+    + FullyQualifiedErrorId  
+   : NativeCommandError
+ 
+??? Starting in-memory MongoDB fallback server...
+???? In-Memory MongoDB Server running at: mongodb://127.0.0.1:61776/
+??? connected to in-memory MongoDB: 127.0.0.1
+???? Seeding database...
+??? injected env (0) from .env // tip: ??? secrets for agents [www.dotenvx.com]
+Seeder Starting... Connecting to: mongodb://localhost:27017/skillsphere
+??? Using existing active MongoDB connection for seeding
+???? Purged all existing data
+???? Seeded Admin User: admin@skillsphere.com
+???? Seeded Clients
+???? Seeded Freelancer Users
+???? Seeded Client Profiles
+???? Seeded Freelancer Profiles
+???? Seeded Job Postings
+???? Seeded Job Applications
+???? Seeded Direct Messages
+??? Seeded Reviews
+???? Seeded Notifications
+???? Seed Data Successfully Injected!
