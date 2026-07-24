@@ -135,7 +135,7 @@ export default function LandingPage() {
                             <h2 className="heading-lg" style={{ color: 'white', marginBottom: 20 }}>Intelligent<br /><span className="text-gradient">Talent Matching</span></h2>
                             <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: 32, lineHeight: 1.8 }}>Our multi-dimensional scoring algorithm evaluates every freelancer across 5 dimensions to surface the best match for your project.</p>
                             {[
-                                ['Skills Match', '40%', 'Jaccard similarity between required and possessed skills'],
+                                ['Skills Match', '50%', 'Jaccard similarity between required and possessed skills'],
                                 ['Experience', '20%', 'Years mapped to job level (entry/mid/expert)'],
                                 ['Distance', '15%', 'Haversine geo-proximity within 50km radius'],
                                 ['Budget Fit', '10%', 'Closeness of hourly rate to project budget'],
