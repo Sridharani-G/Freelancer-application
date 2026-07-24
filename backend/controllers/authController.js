@@ -465,15 +465,17 @@ exports.appleAuth = async (req, res, next) => {
 // @GET /api/auth/google/callback
 exports.googleCallback = async (req, res, next) => {
     try {
+        const frontendOrigin = process.env.CLIENT_URL || process.env.FRONTEND_URL || process.env.VITE_APP_URL || 'http://localhost:5173';
+
         if (!req.user) {
-            const fallback = `${process.env.CLIENT_URL || 'http://localhost:5173'}/login?oauth=google&error=1`;
+            const fallback = `${frontendOrigin}/login?oauth=google&error=1`;
             return res.redirect(fallback);
         }
 
         const selectedRole = req.query?.state === 'freelancer' ? 'freelancer' : 'client';
         const user = await User.findById(req.user._id);
         if (!user) {
-            return res.redirect(`${process.env.CLIENT_URL || 'http://localhost:5173'}/login?oauth=google&error=1`);
+            return res.redirect(`${frontendOrigin}/login?oauth=google&error=1`);
         }
 
         const isNewGoogleUser = req.user._isNewGoogleUser === true;
@@ -500,7 +502,7 @@ exports.googleCallback = async (req, res, next) => {
         }
 
 
-        const allowedOrigin = (process.env.CLIENT_URL || 'http://localhost:5173').split(',').map((v) => v.trim()).filter(Boolean)[0];
+        const allowedOrigin = frontendOrigin.split(',').map((v) => v.trim()).filter(Boolean)[0];
 
         if (isNewGoogleUser) {
             // New Google user — send them to set a password before full login

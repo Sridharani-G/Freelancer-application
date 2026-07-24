@@ -18,7 +18,8 @@ router.post('/set-google-password', setGooglePassword);
 router.post('/firebase-social', firebaseSocial);
 router.get('/google', googleAuth);
 router.get('/google/callback', (req, res, next) => {
-    const failureRedirect = `${process.env.CLIENT_URL || 'http://localhost:5173'}/login?oauth=google&error=1`;
+    const frontendOrigin = process.env.CLIENT_URL || process.env.FRONTEND_URL || process.env.VITE_APP_URL || 'http://localhost:5173';
+    const failureRedirect = `${frontendOrigin}/login?oauth=google&error=1`;
     passport.authenticate('google', {
         failureRedirect,
         session: false,

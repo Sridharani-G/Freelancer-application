@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import { clearError, loginUser, setAuthSession, getMe } from '../../redux/slices/authSlice';
+import { buildApiUrl } from '../../services/api';
 import { getRoleDashboardPath } from '../../utils/rolePaths';
 
 /* ─── Inline scoped styles injected once ──────────────────────── */
@@ -325,7 +326,7 @@ export default function LoginPage() {
     const isBusy = useMemo(() => loading || isGoogleProcessing, [loading, isGoogleProcessing]);
 
     const handleGoogleAuth = () => {
-        const url = new URL('/api/auth/google', window.location.origin);
+        const url = new URL(buildApiUrl('/auth/google'));
         url.searchParams.set('role', 'client');
         window.location.assign(url.toString());
     };

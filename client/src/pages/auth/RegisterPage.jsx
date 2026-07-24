@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { FiMail, FiLock, FiEye, FiEyeOff, FiUser } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import { clearError, registerUser } from '../../redux/slices/authSlice';
+import { buildApiUrl } from '../../services/api';
 import { getRoleDashboardPath } from '../../utils/rolePaths';
 
 function injectAuthStyles() {
@@ -85,7 +86,7 @@ export default function RegisterPage() {
     }, [error, dispatch]);
 
     const handleGoogleAuth = () => {
-        const url = new URL('/api/auth/google', window.location.origin);
+        const url = new URL(buildApiUrl('/auth/google'));
         url.searchParams.set('role', accountType);
         window.location.assign(url.toString());
     };

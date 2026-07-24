@@ -1,7 +1,28 @@
 import axios from 'axios';
 
+export const getApiBaseUrl = () => {
+    const configured = import.meta.env.VITE_API_URL?.trim();
+    if (configured) return configured.replace(/\/+$/, '');
+    return '/api';
+};
+
+export const buildApiUrl = (path = '') => {
+    const base = getApiBaseUrl();
+    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+
+    if (/^https?:\/\//i.test(base)) {
+        try {
+            return new URL(cleanPath, `${base}/`).toString();
+        } catch {
+            return `${base}/${cleanPath}`.replace(/\/+/g, '/');
+        }
+    }
+
+    return `${base}/${cleanPath}`.replace(/\/+/g, '/');
+};
+
 const API = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || '/api',
+    baseURL: getApiBaseUrl(),
     withCredentials: true,
     timeout: 20000, // 20 seconds
 });

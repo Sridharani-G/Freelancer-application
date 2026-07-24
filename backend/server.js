@@ -52,8 +52,13 @@ const startServer = async () => {
     app = express();
     server = http.createServer(app);
 
-    const configuredOrigins = (process.env.CLIENT_URL || 'http://localhost:5173')
-        .split(',')
+    const configuredOrigins = [
+        process.env.CLIENT_URL,
+        process.env.FRONTEND_URL,
+        process.env.VITE_APP_URL,
+        process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
+    ]
+        .flatMap((value) => (value ? value.split(',') : []))
         .map((value) => value.trim())
         .filter(Boolean);
     const allowedOrigins = [
