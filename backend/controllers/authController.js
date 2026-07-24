@@ -524,11 +524,11 @@ exports.googleCallback = async (req, res, next) => {
         user.refreshToken = refreshToken;
         await user.save({ validateBeforeSave: false });
 
-        const isProduction = process.env.NODE_ENV === 'production';
+        const isProduction = process.env.NODE_ENV === 'production' || process.env.RENDER === 'true';
         const cookieOptions = {
             httpOnly: true,
             secure: isProduction,
-            sameSite: 'lax',
+            sameSite: isProduction ? 'none' : 'lax',
             maxAge: 7 * 24 * 60 * 60 * 1000,
         };
         res.cookie('token', token, cookieOptions);

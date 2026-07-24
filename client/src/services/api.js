@@ -42,7 +42,7 @@ const fetchCsrf = () => {
     if (_csrfToken) return Promise.resolve(_csrfToken);
     if (_csrfFetching) return _csrfFetching;
 
-    _csrfFetching = axios.get('/api/auth/csrf-token', {
+    _csrfFetching = axios.get(buildApiUrl('/auth/csrf-token'), {
         withCredentials: true,
         timeout: 5000, // short — never block main request for long
     }).then(res => {
