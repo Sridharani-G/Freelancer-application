@@ -31,6 +31,22 @@ const persistAuth = (token, user) => {
     }
 };
 
+const normalizeErrorPayload = (err, fallbackMessage) => {
+    const responseData = err?.response?.data;
+    if (typeof responseData === 'string') {
+        return { message: responseData };
+    }
+    if (responseData && typeof responseData === 'object') {
+        return responseData;
+    }
+
+    if (err?.code === 'ERR_NETWORK' || err?.message === 'Network Error') {
+        return { message: 'Unable to reach the backend. Set VITE_API_URL to your Render backend URL.' };
+    }
+
+    return { message: fallbackMessage };
+};
+
 // Async thunks
 export const loginUser = createAsyncThunk('auth/login', async (credentials, { rejectWithValue }) => {
     try {
@@ -40,9 +56,7 @@ export const loginUser = createAsyncThunk('auth/login', async (credentials, { re
         }
         return data;
     } catch (err) {
-        // Pass full response data so callers can detect requiresVerification
-        const responseData = err.response?.data;
-        return rejectWithValue(responseData || err.message || 'Login failed');
+        return rejectWithValue(normalizeErrorPayload(err, 'Login failed'));
     }
 });
 
@@ -56,7 +70,7 @@ export const registerUser = createAsyncThunk('auth/register', async (userData, {
         }
         return data;
     } catch (err) {
-        return rejectWithValue(err.response?.data?.message || 'Registration failed');
+        return rejectWithValue(normalizeErrorPayload(err, 'Registration failed'));
     }
 });
 
@@ -65,7 +79,7 @@ export const getMe = createAsyncThunk('auth/getMe', async (_, { rejectWithValue 
         const { data } = await API.get('/auth/me');
         return data.user;
     } catch (err) {
-        return rejectWithValue(err.response?.data?.message);
+        return rejectWithValue(normalizeErrorPayload(err, 'Session check failed'));
     }
 });
 
@@ -77,7 +91,7 @@ export const verifyOtpCode = createAsyncThunk('auth/verifyOtpCode', async ({ ema
         }
         return data;
     } catch (err) {
-        return rejectWithValue(err.response?.data?.message || 'OTP verification failed');
+        return rejectWithValue(normalizeErrorPayload(err, 'OTP verification failed'));
     }
 });
 
